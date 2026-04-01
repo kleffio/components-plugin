@@ -1,0 +1,39 @@
+{
+  "name": "@kleffio/plugin-components",
+  "version": "0.1.0",
+  "description": "Component showcase plugin for the Kleff panel",
+  "license": "MIT",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kleffio/plugin-components.git"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsup",
+    "typecheck": "tsc --noEmit"
+  },
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0",
+    "next": ">=15.0.0",
+    "@kleffio/sdk": "*",
+    "@kleffio/ui": "*"
+  },
+  "devDependencies": {
+    "@kleffio/sdk": "github:kleffio/plugin-sdk-js#v0.1.0",
+    "@kleffio/ui": "github:kleffio/ui#v0.1.0",
+    "@types/react": "^19.0.0",
+    "lucide-react": "^0.577.0",
+    "next": "^15.0.0",
+    "react": "^19.0.0",
+    "recharts": "2.15.4",
+    "tsup": "^8.0.0",
+    "typescript": "~5.9.3"
+  }
+}
