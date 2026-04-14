@@ -57,7 +57,7 @@ jobs:
           github-token: ${{ steps.app-token.outputs.token }}
           script: |
             const version = "${{ steps.version.outputs.version }}";
-            const branch = `update/plugin-components-${version}`;
+            const branch = `update/kleff-components-${version}`;
 
             // Get current plugins.json from registry repo
             const { data: file } = await github.rest.repos.getContent({
@@ -67,7 +67,7 @@ jobs:
             });
 
             const plugins = JSON.parse(Buffer.from(file.content, "base64").toString());
-            const idx = plugins.findIndex(p => p.id === "plugin-components");
+            const idx = plugins.findIndex(p => p.id === "kleff.components");
             if (idx !== -1) plugins[idx].version = version;
 
             // Create branch and commit
@@ -101,7 +101,7 @@ jobs:
               owner: "kleffio",
               repo: "plugin-registry",
               path: "plugins.json",
-              message: `chore: bump plugin-components to v${version}`,
+              message: `chore: bump kleff.components to v${version}`,
               content: Buffer.from(JSON.stringify(plugins, null, 2) + "\n").toString("base64"),
               branch,
               sha: file.sha,
@@ -110,7 +110,7 @@ jobs:
             const { data: pr } = await github.rest.pulls.create({
               owner: "kleffio",
               repo: "plugin-registry",
-              title: `chore: bump plugin-components to v${version}`,
+              title: `chore: bump kleff.components to v${version}`,
               head: branch,
               base: "main",
               body: `Automated release PR from \`kleffio/components-plugin\` tag \`v${version}\`.`,
