@@ -1,0 +1,26 @@
+FROM node:22-alpine AS builder
+RUN apk add --no-cache git
+RUN corepack enable pnpm
+
+# Copy local @kleffio/ui so the build uses the workspace source instead of the published tag
+WORKDIR /workspace/packages/ui
+COPY packages/ui/package.json ./
+COPY packages/ui/src ./src
+
+WORKDIR /workspace/plugins/components-plugin
+COPY plugins/components-plugin/package.json ./
+# Point @kleffio/ui at the local copy
+RUN node -e "\
+  const fs = require('fs');\
+  const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));\
+  pkg.devDependencies['@kleffio/ui'] = 'file:../../packages/ui';\
+  fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2));\
+"
+RUN pnpm install
+COPY plugins/components-plugin .
+RUN pnpm build
+
+FROM nginx:alpine
+COPY --from=builder /workspace/plugins/components-plugin/dist /usr/share/nginx/html
+COPY --from=builder /workspace/plugins/components-plugin/nginx.conf /etc/nginx/conf.d/default.conf
+EXPOSE 3001

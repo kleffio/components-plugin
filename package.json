@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "@kleffio/sdk": "github:kleffio/plugin-sdk-js#v0.1.0",
-    "@kleffio/ui": "github:kleffio/ui#v0.1.0",
+    "@kleffio/ui": "github:kleffio/ui#v0.1.2",
     "@types/react": "^19.0.0",
     "lucide-react": "^0.577.0",
     "next": "^15.0.0",
