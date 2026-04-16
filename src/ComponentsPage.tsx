@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, type ReactNode } from "react";
-import { toast } from "sonner";
 import {
   Area,
   AreaChart,
@@ -18,7 +17,6 @@ import {
   Bell,
   Check,
   CheckCircle2,
-  ChevronRight,
   Info,
   OctagonX,
   Server,
@@ -47,7 +45,15 @@ import { Button } from "@kleffio/ui";
 import { ButtonGroup } from "@kleffio/ui";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@kleffio/ui";
 import { Checkbox } from "@kleffio/ui";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@kleffio/ui";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+  CollapsibleTriggerIcon,
+  FolderCollapsible,
+  FolderCollapsibleContent,
+  FolderCollapsibleTrigger,
+} from "@kleffio/ui";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -84,6 +90,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@kleffio/ui";
 import { Textarea } from "@kleffio/ui";
 import { Toggle } from "@kleffio/ui";
+import { toast } from "@kleffio/ui";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@kleffio/ui";
 import {
   ChartContainer,
@@ -180,10 +187,23 @@ const TABLE_ROWS = [
 
 // ─── Section wrapper ──────────────────────────────────────────────────────────
 
-function Section({ title, children }: { title: string; children: ReactNode }) {
+function Section({
+  title,
+  description,
+  children,
+}: {
+  title: string
+  description?: ReactNode
+  children: ReactNode
+}) {
   return (
     <section className="flex flex-col gap-4">
-      <h2 className="text-sm font-semibold tracking-widest text-amber-400 uppercase">{title}</h2>
+      <div className="flex flex-col gap-1">
+        <h2 className="text-sm font-semibold tracking-widest text-amber-400 uppercase">{title}</h2>
+        {description ? (
+          <p className="text-xs text-muted-foreground">{description}</p>
+        ) : null}
+      </div>
       {children}
     </section>
   );
@@ -261,7 +281,10 @@ export function ComponentsPage() {
           <Separator />
 
           {/* ── Alerts ── */}
-          <Section title="Alerts">
+          <Section
+            title="Alerts"
+            description="These examples intentionally use consumer-provided icons to show caller-controlled composition."
+          >
             <Alert variant="info">
               <Info className="size-4" />
               <AlertTitle>Scheduled maintenance</AlertTitle>
@@ -301,7 +324,10 @@ export function ComponentsPage() {
           <Separator />
 
           {/* ── Toasts ── */}
-          <Section title="Toasts">
+          <Section
+            title="Toasts"
+            description="Toast text and status icons are owned by the shared toaster in @kleffio/ui."
+          >
             <Row wrap>
               <Button variant="outline" size="sm" onClick={() => toast("Server restarted", { description: "Minecraft Survival is back online." })}>
                 Default
@@ -519,17 +545,38 @@ export function ComponentsPage() {
               </AccordionItem>
             </Accordion>
 
-            <Collapsible>
-              <CollapsibleTrigger asChild>
-                <Button variant="outline" size="sm" className="gap-2">
-                  <ChevronRight className="size-3.5 transition-transform ui-open:rotate-90" />
-                  Advanced Options
-                </Button>
-              </CollapsibleTrigger>
-              <CollapsibleContent className="mt-2 rounded-lg border border-border p-3 text-sm text-muted-foreground">
-                JVM flags, custom startup scripts, and environment variable overrides.
-              </CollapsibleContent>
-            </Collapsible>
+            <div className="grid gap-4 md:grid-cols-2">
+              <div className="rounded-xl border border-border bg-card/40 p-4">
+                <div className="mb-3 text-xs font-medium tracking-widest text-muted-foreground uppercase">
+                  Plain Collapsible
+                </div>
+                <Collapsible>
+                  <CollapsibleTrigger asChild>
+                    <Button variant="outline" size="sm" className="gap-2">
+                      <CollapsibleTriggerIcon />
+                      Advanced Options
+                    </Button>
+                  </CollapsibleTrigger>
+                  <CollapsibleContent className="mt-2 rounded-lg border border-border p-3 text-sm text-muted-foreground">
+                    JVM flags, custom startup scripts, and environment variable overrides.
+                  </CollapsibleContent>
+                </Collapsible>
+              </div>
+
+              <div className="rounded-xl border border-border bg-card/40 p-4">
+                <div className="mb-3 text-xs font-medium tracking-widest text-muted-foreground uppercase">
+                  Folder Collapsible
+                </div>
+                <FolderCollapsible>
+                  <FolderCollapsibleTrigger>
+                    Advanced Options
+                  </FolderCollapsibleTrigger>
+                  <FolderCollapsibleContent className="text-sm text-muted-foreground">
+                    JVM flags, custom startup scripts, and environment variable overrides.
+                  </FolderCollapsibleContent>
+                </FolderCollapsible>
+              </div>
+            </div>
           </Section>
 
           <Separator />

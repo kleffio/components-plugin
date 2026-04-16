@@ -13,7 +13,7 @@ export const componentsPlugin = definePlugin({
       {
         slot: "page",
         component: ComponentsPage,
-        props: { path: "/components" },
+        props: { path: "/p/components" },
       },
       {
         slot: "navbar.item",
