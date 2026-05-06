@@ -33,7 +33,7 @@ export function RegionBadge({ region, short = false, className = "" }: RegionBad
   const label = short ? REGION_SHORT[region] : REGION_LABELS[region];
   const flag = REGION_FLAGS[region];
   return (
-    <span className={`inline-flex items-center gap-1.5 rounded-full px-2 py-0.5 text-xs font-medium bg-zinc-800 text-zinc-300 ring-1 ring-inset ring-zinc-700/50 ${className}`}>
+    <span className={`inline-flex items-center gap-1.5 rounded-full bg-white/[0.06] px-2 py-0.5 text-xs font-medium text-white/70 ring-1 ring-inset ring-white/10 shadow-[0_0_12px_rgba(255,255,255,0.03)] ${className}`}>
       <span>{flag}</span>
       {label ?? region}
     </span>
