@@ -31,7 +31,7 @@ import {
 // Local fallback copies retained in ./glow-follow and ./progress for easy reversal.
 // import { installGlowFollow } from "./glow-follow";
 // import { Progress } from "./progress";
-import { installGlowFollow, Progress } from "@kleffio/ui";
+import { Progress } from "@kleffio/ui";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@kleffio/ui";
 import { Alert, AlertAction, AlertDescription, AlertTitle } from "@kleffio/ui";
 import {
@@ -103,8 +103,6 @@ import { PlanBadge } from "./domain/PlanBadge";
 import { RegionBadge } from "./domain/RegionBadge";
 import { ServerCard } from "./domain/ServerCard";
 import { StatusBadge } from "./domain/StatusBadge";
-
-installGlowFollow();
 
 // ─── Chart data & configs ─────────────────────────────────────────────────────
 
