@@ -2,8 +2,8 @@ FROM node:22-alpine AS builder
 RUN apk add --no-cache git
 RUN corepack enable pnpm
 WORKDIR /app
-COPY package.json ./
-RUN pnpm install
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+RUN pnpm install --frozen-lockfile
 COPY . .
 RUN pnpm build
 
