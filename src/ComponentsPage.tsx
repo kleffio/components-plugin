@@ -249,9 +249,9 @@ export function ComponentsPage() {
               <h1 className="text-3xl font-semibold tracking-tight text-white drop-shadow-sm">Component Showcase</h1>
               <p className="max-w-2xl text-sm text-white/50">All UI primitives and domain components rendered with the account home glass treatment.</p>
             </div>
-            <div className="component-showcase-pill">
-              @kleffio/ui
-            </div>
+            <span className="ui-shine-pill">
+              <span className="ui-shine-pill__content">@kleffio/ui</span>
+            </span>
           </div>
 
           <div className="component-showcase-stats">
